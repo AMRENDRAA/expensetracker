@@ -10,6 +10,8 @@ const connectDb = require('./Config/DbConnection')
 connectDb();
 app.get('/', (req, res) => res.send(`server is live `))
 app.use("/api/expenses", require("./route/expenseRoute"));
+app.use("/api/users", require("./route/expenseUserRoute"));
+
 
 app.listen(PORT, () => console.log(`Running on Port ${PORT}`))
 
