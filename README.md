@@ -1,32 +1,54 @@
-Expense Tracker API
+# Expense Tracker API
 
-A simple backend REST API for tracking personal expenses. 
-Built with Node.js, Express, and MongoDB. Users can register, log in, and manage their own list of expenses (create, view, update, delete) — each user only sees their own data, protected by JWT authentication.
+A secure RESTful backend API for managing personal expenses, built with **Node.js, Express.js, and MongoDB**. The application provides user registration and authentication using **JWT**, allowing each user to securely manage their own expenses through complete CRUD operations.
 
-This project is a good example for beginners learning how backend APIs handle users, authentication, and CRUD operations (Create, Read, Update, Delete).
+The project demonstrates core backend concepts including **REST API design, user authentication, password hashing, authorization, database modeling, and protected resources**.
 
+## Tech Stack
 
-Tech Stack
-Tool	Purpose
-Express	Web framework for building the API routes
-Mongoose	Talks to MongoDB using JavaScript objects (models)
-bcrypt	Hashes passwords so they're never stored as plain text
-jsonwebtoken (JWT)	Creates a login "token" so the API knows who's making a request
-dotenv	Loads secret config (like DB URL) from a .env file
-nodemon	Auto-restarts the server while you're developing
+| Technology             | Purpose                                                   |
+| ---------------------- | --------------------------------------------------------- |
+| **Node.js**            | JavaScript runtime for building the backend               |
+| **Express.js**         | Web framework for creating API routes and middleware      |
+| **MongoDB**            | NoSQL database for storing users and expenses             |
+| **Mongoose**           | ODM for defining schemas and interacting with MongoDB     |
+| **bcrypt**             | Securely hashes user passwords before storing them        |
+| **jsonwebtoken (JWT)** | Generates and verifies authentication tokens              |
+| **dotenv**             | Manages environment variables and sensitive configuration |
+| **nodemon**            | Automatically restarts the server during development      |
 
-Auth (/api/users)
-Method	Endpoint	Description	Body
-POST	/api/users/register	Create a new account	{ "username", "email", "password" }
-POST	/api/users/login	Log in and get a JWT token	{ "email", "password" }
+## Authentication APIs
 
+**Base Route:** `/api/users`
 
+| Method | Endpoint    | Description                                    | Request Body                          |
+| ------ | ----------- | ---------------------------------------------- | ------------------------------------- |
+| `POST` | `/register` | Creates a new user account                     | `{ "username", "email", "password" }` |
+| `POST` | `/login`    | Authenticates the user and returns a JWT token | `{ "email", "password" }`             |
 
+## Expense APIs
 
-Method	Endpoint	Description	Auth required
-POST	/api/expenses	Add a new expense	✅
-GET	/api/expenses	Get all expenses for the logged-in user	✅
-PUT	/api/expenses/:id	Update an expense by its ID	❌ (see note below)
-DELETE	/api/expenses/:id	Delete an expense by its ID	❌ (see note below)
+**Base Route:** `/api/expenses`
 
+| Method   | Endpoint | Description                                            | Authentication |
+| -------- | -------- | ------------------------------------------------------ | -------------- |
+| `POST`   | `/`      | Creates a new expense for the logged-in user           | ✅ JWT Required |
+| `GET`    | `/`      | Retrieves all expenses belonging to the logged-in user | ✅ JWT Required |
+| `PUT`    | `/:id`   | Updates an expense by its ID                           | ✅ JWT Required |
+| `DELETE` | `/:id`   | Deletes an expense by its ID                           | ✅ JWT Required |
 
+## Key Features
+
+* **User Registration & Login** – Users can securely create accounts and authenticate.
+* **JWT Authentication** – Protected endpoints require a valid JWT token.
+* **Password Security** – Passwords are hashed using bcrypt and never stored as plain text.
+* **Expense CRUD Operations** – Users can create, retrieve, update, and delete their expenses.
+* **User-Level Authorization** – Each user can access and modify only their own expense records.
+* **MongoDB Integration** – Mongoose models provide structured interaction with the database.
+* **Environment-Based Configuration** – Sensitive credentials and configuration are managed through `.env`.
+
+## Example Workflow
+
+`Register → Login → Receive JWT → Send JWT with Expense Requests → Access Own Expenses`
+
+This project is a practical example of how a backend application handles **authentication, authorization, RESTful API design, database operations, and secure user-specific data management**.
