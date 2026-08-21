@@ -15,23 +15,6 @@ jsonwebtoken (JWT)	Creates a login "token" so the API knows who's making a reque
 dotenv	Loads secret config (like DB URL) from a .env file
 nodemon	Auto-restarts the server while you're developing
 
-expensetracker/
-├── server.js                     # App entry point — starts the server
-├── Config/
-│   └── DbConnection.js           # Connects to MongoDB
-├── Model/
-│   ├── ExpenseModel.js           # Schema/shape of an "expense" document
-│   └── ExpenseUserModel.js       # Schema/shape of a "user" document
-├── Controller/
-│   ├── expenseController.js      # Logic for creating/reading/updating/deleting expenses
-│   └── expenseUserController.js  # Logic for registering & logging in users
-├── route/
-│   ├── expenseRoute.js           # URLs for expense actions (/api/expenses)
-│   └── expenseUserRoute.js       # URLs for auth actions (/api/users)
-├── Middleware/
-│   └── validatetoken.js          # Checks the JWT token before letting a request through
-└── fix.js                        # One-off script to clean up old data in the DB
-
 Auth (/api/users)
 Method	Endpoint	Description	Body
 POST	/api/users/register	Create a new account	{ "username", "email", "password" }
